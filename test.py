@@ -1,23 +1,19 @@
-class Solution(object):
-    def searchInsert(self, nums, target):
-        """
-        :type nums: List[int]
-        :type target: int
-        :rtype: int
-        """
-        n=len(nums)
+class Solution:
+    def check(self,m, target):
+        return m>target
+    def upperBound(self, arr, target):
+        # code here
+        n=len(arr)
+        if arr[-1]<target:
+            return n
         l=0
-        index=n
         r=n-1
-        while(l<=r):
-            mid = (l+r)//2
-            if nums[mid]==target:
-                return mid
-            elif nums[mid]>target:
-                r=mid-1
-                index=mid
-            elif nums[mid]<target:
-                l=mid+1
-        return index
-
-print(Solution().searchInsert([1,3,5,6],7))
+        while(r-l>1):
+            m=(l+r)//2
+            if(self.check(arr[m],target)):
+                r=m
+            else:
+                l=m
+        return r
+        
+print(Solution().upperBound([2,3,7,10,11,11,25],9))
